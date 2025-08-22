@@ -1,0 +1,14 @@
+export const EnvConfiguration = () => ({
+  environment: process.env.NODE_ENV || 'dev',
+  port: Number(process.env.PORT),
+  defaultLimit: Number(process.env.DEFAULT_LIMIT),
+  dbPassword: process.env.DB_PASSWORD,
+  dbName: process.env.DB_NAME,
+  dbPort: Number(process.env.DB_PORT),
+  dbUser: process.env.DB_USER,
+  dbHost: process.env.DB_HOST,
+  dbSync: process.env.DB_SYNC,
+  cachePort: Number(process.env.CACHE_PORT),
+  cacheHost: process.env.CACHE_HOST,
+  cacheTtl: process.env.CACHE_TTL,
+});
