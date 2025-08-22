@@ -125,3 +125,20 @@ docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
 ```
 docker-compose -f docker-compose.prod.yaml --env-file .env.prod up
 ```
+
+## Preguntas
+### ¿Cómo desacoplarías la lógica de negocio del framework NestJS?
+
+Se busco hacerlo usando el patron controller - service - repository e inyectando dependencias. esto permitiria abstraer un poco.
+Por otro lado podría usarse arquitectura limpia haciendo uso de los casos de uso, el dominio y la infraestructura, esto permite desacoplar
+totalmente la logica de negocio de la implementeacion.
+
+### ¿Cómo escalarías esta API para soportar miles de órdenes concurrentes?
+Al tener la imagen completa podría implementarse en un orquestador como kubernetes o en aws ecs con autoscaling esto me permitiria manejar
+miles de peticiones.
+
+### ¿Qué ventajas ofrece Redis en este caso y qué alternativas considerarías?
+Es una base de datos robusta que tiene grandes prestaciones cómo conmutacion por error automatica, replicación, soporta diversidad de estrucutra 
+de datos, pudiese orquestarse independiente de la plataforma ya sea cloud o onprimise. alternativas pudiese usar dynamodb o mencached. Para el caso
+del desarrollo que permite tener un servidor local rapidamente con docker sin ncesidad de instalaciones o tener algun servidor dedicado.
+ 
