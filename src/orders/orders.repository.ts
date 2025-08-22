@@ -48,7 +48,7 @@ export class OrdersRepository implements OrdersRepositoryInterface {
 
     const cachedOrders = await this.cacheManager.get<Order[]>(cacheKey);
 
-    if (cachedOrders) {
+    if (cachedOrders?.length) {
       console.log('Hit de cache');
       return cachedOrders;
     }
