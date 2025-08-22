@@ -10,6 +10,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-yet';
 import { Order } from './orders/models/order.model';
 import { OrderItem } from './orders/models/order-item.model';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { OrderItem } from './orders/models/order-item.model';
     }),
     OrdersModule,
     CommonModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [],
   providers: [],
