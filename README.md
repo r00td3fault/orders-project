@@ -14,6 +14,39 @@ Orders Api
 - Jobs
 - ConfigModule Valid required env
 
+## API Reference
+
+Download the file ```Orders.postman_collection.json``` and import in POSTMAN to get all ready endpoints
+
+### Api documentation
+```
+http://localhost:3000/api
+```
+
+#### Get all orders
+
+```http
+  GET /orders?limit=10,pague=1 (pagination is optional)
+```
+
+#### Get order
+
+```http
+  GET /orders/${id}
+```
+
+#### Create order
+
+```http
+  POST /orders/
+```
+
+#### Advance order
+
+```http
+  POST /orders/${id}/advance
+```
+
 ## Project setup
 
 Clone the project and follow the next steps:
