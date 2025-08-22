@@ -80,3 +80,15 @@ $ npm run test:e2e
 
 ```
 
+# Production Build
+1. Create the file ```.env.prod```
+2. fill environment variables
+3. Create prod image with all services (bd, cache, app)
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+4. you only have to build one time
+5. the next time just run or use image in kubernetes or more
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up
+```

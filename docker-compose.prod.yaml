@@ -1,0 +1,51 @@
+services:
+  ordersapp:
+    depends_on:
+      - db
+      - redis
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ordersapp-docker
+    container_name: ordersapp
+    restart: always
+    ports:
+      - '${PORT}:${PORT}'
+    environment:
+      DEFAULT_LIMIT: ${DEFAULT_LIMIT}
+      PORT: ${PORT}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_HOST: ${DB_HOST}
+      DB_SYNC: ${DB_SYNC}
+      CACHE_PORT: ${CACHE_PORT}
+      CACHE_HOST: ${CACHE_HOST}
+      CACHE_TTL: ${CACHE_TTL}
+  db:
+    image: postgres:15
+    container_name: nest_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - '${DB_PORT}:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+
+  redis:
+    image: redis:7
+    container_name: nest_redis
+    restart: always
+    ports:
+      - '${CACHE_PORT}:${CACHE_PORT}'
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:
