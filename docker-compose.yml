@@ -1,0 +1,23 @@
+services:
+  ordersDb:
+    image: postgres:15
+    container_name: ordersDb
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - '${DB_PORT}:5432'
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+
+  ordersCache:
+    image: redis:7
+    container_name: ordersCache
+    restart: always
+    ports:
+      - '${CACHE_PORT}:${CACHE_PORT}'
+    volumes:
+      - ./redis_data:/data
