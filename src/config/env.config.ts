@@ -11,4 +11,5 @@ export const EnvConfiguration = () => ({
   cachePort: Number(process.env.CACHE_PORT),
   cacheHost: process.env.CACHE_HOST,
   cacheTtl: process.env.CACHE_TTL,
+  secretToken: process.env.SECRET_TOKEN,
 });

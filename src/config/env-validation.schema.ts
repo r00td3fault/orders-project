@@ -12,4 +12,5 @@ export const EnvValidationSchema = Joi.object({
   CACHE_PORT: Joi.number().default(6379),
   CACHE_HOST: Joi.string().required(),
   CACHE_TTL: Joi.number().default(1800),
+  SECRET_TOKEN: Joi.string().required(),
 });
