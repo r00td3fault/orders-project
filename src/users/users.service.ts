@@ -49,4 +49,10 @@ export class UsersService {
       );
     }
   }
+
+  async findOneById(id: string): Promise<ResponseUserDto | null> {
+    const user = await this.userRepository.findOneById(id);
+    if (!user) return null;
+    return userMapper(user);
+  }
 }

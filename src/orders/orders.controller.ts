@@ -7,12 +7,14 @@ import {
   ParseUUIDPipe,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import {
   ApiCreatedResponse,
+  ApiHeader,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -20,6 +22,7 @@ import {
 
 import { ResponseOrderDto } from './dto/response-order.dto';
 import { orderMapper } from './orders.mapper';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @ApiTags('orders')
 @Controller('orders')
@@ -73,6 +76,12 @@ export class OrdersController {
   @ApiOperation({
     summary: 'Advance with order state  initiated -> sent -> delivered',
   })
+  @ApiHeader({
+    name: 'Authorization',
+    description: 'Bearer toke authorization',
+    example: 'Bearer <token_value>',
+  })
+  @UseGuards(AuthGuard)
   @Post(':id/advance')
   @HttpCode(202)
   async updateOrderState(@Param('id', ParseUUIDPipe) id: string) {

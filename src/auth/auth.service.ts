@@ -7,6 +7,7 @@ import { ResponseUserDto } from 'src/users/dto/response-user.dto';
 
 import * as bcrypt from 'bcrypt';
 import { LoginResponse } from './dto/login-response.dto';
+import { jwtPayloadType } from './types/jwtPayload.type';
 
 @Injectable()
 export class AuthService {
@@ -27,7 +28,7 @@ export class AuthService {
     if (!isPaswwordMatch)
       throw new UnauthorizedException(`Bad credentials try again`);
 
-    const payload = { sub: user.id };
+    const payload: jwtPayloadType = { sub: user.id };
 
     return {
       access_token: await this.jwtService.signAsync(payload),

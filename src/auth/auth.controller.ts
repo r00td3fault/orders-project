@@ -21,6 +21,7 @@ export class AuthController {
   })
   @ApiOkResponse({
     description: 'Success and return de token',
+    type: LoginResponse,
   })
   @HttpCode(HttpStatus.OK)
   @Post('login')
