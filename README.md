@@ -8,7 +8,7 @@ Orders Api
 ## Features
 
 - Desing Patterns
-- Interceptors and loggin
+- Interceptors, Guards and loggin
 - Swwager
 - github actions integration
 - Jobs
