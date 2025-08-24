@@ -12,4 +12,10 @@ export const EnvConfiguration = () => ({
   cacheHost: process.env.CACHE_HOST,
   cacheTtl: process.env.CACHE_TTL,
   secretToken: process.env.SECRET_TOKEN,
+  appRateShortTtl: Number(process.env.APP_RATE_SHORT_TTL),
+  appRateShortLimit: Number(process.env.APP_RATE_SHORT_LIMIT),
+  appRateMediumTtl: Number(process.env.APP_RATE_MEDIUM_TTL),
+  appRateMediumLimit: Number(process.env.APP_RATE_MEDIUM_LIMIT),
+  appRateLongTtl: Number(process.env.APP_RATE_LONG_TTL),
+  appRateLongLimit: Number(process.env.APP_RATE_LONG_LIMIT),
 });

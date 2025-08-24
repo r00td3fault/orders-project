@@ -13,12 +13,37 @@ import { OrderItem } from './orders/models/order-item.model';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ThrottlerModule, ThrottlerModuleOptions } from '@nestjs/throttler';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [EnvConfiguration],
       validationSchema: EnvValidationSchema,
+    }),
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService): ThrottlerModuleOptions => {
+        const throttlers: ThrottlerModuleOptions = [
+          {
+            name: 'short',
+            ttl: configService.get<number>('APP_RATE_SHORT_TTL')!,
+            limit: configService.get<number>('APP_RATE_SHORT_LIMIT')!,
+          },
+          {
+            name: 'medium',
+            ttl: configService.get<number>('APP_RATE_MEDIUM_TTL')!,
+            limit: configService.get<number>('APP_RATE_MEDIUM_LIMIT')!,
+          },
+          {
+            name: 'long',
+            ttl: configService.get<number>('APP_RATE_LONG_TTL')!,
+            limit: configService.get<number>('APP_RATE_LONG_LIMIT')!,
+          },
+        ];
+        return throttlers;
+      },
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
@@ -48,9 +73,9 @@ import { UsersModule } from './users/users.module';
         return { store };
       },
     }),
+    ScheduleModule.forRoot(),
     OrdersModule,
     CommonModule,
-    ScheduleModule.forRoot(),
     AuthModule,
     UsersModule,
   ],
