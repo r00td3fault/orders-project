@@ -26,7 +26,6 @@ export class LoggingInterceptor implements NestInterceptor {
       ),
       map((data) => ({
         success: true,
-        timestamp: new Date().toISOString(),
         data,
       })),
       catchError((err: Observable<any>) => {
