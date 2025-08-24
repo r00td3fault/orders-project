@@ -13,6 +13,10 @@ Orders Api
 - github actions integration
 - Jobs
 - ConfigModule Valid required env
+- Helmet
+- Rate limit 
+- Jwt Authentication
+
 
 ## API Reference
 
