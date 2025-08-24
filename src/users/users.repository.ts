@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { UsersRepositoryInterface } from './types/oders-repository.interface';
+import { UsersRepositoryInterface } from './types/user-repository.interface';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './models/user.model';
-import { Sequelize } from 'sequelize';
-import { LoginUserDto } from './dto/login-user.dto';
+import { Sequelize } from 'sequelize-typescript';
 import { RegisterUserDto } from './dto/register-user.dto';
 
 @Injectable()
@@ -24,7 +23,19 @@ export class UsersRepository implements UsersRepositoryInterface {
       },
     });
   }
-  register(registerUserDto: RegisterUserDto): Promise<User | null> {
-    throw new Error('Method not implemented.');
+  async register(registerUserDto: RegisterUserDto): Promise<User> {
+    return await this.sequelize.transaction(async (t) => {
+      const user = await this.userModel.create(
+        {
+          firstName: registerUserDto.firstName,
+          lastName: registerUserDto.lastName,
+          email: registerUserDto.email,
+          password: registerUserDto.password,
+        },
+        { transaction: t },
+      );
+
+      return user;
+    });
   }
 }
