@@ -18,12 +18,15 @@ export class User extends Model {
   @Column
   declare lastName: string;
 
-  @Column(DataType.STRING)
+  @Column({ type: DataType.STRING, unique: true })
   declare email: string;
 
   @Column(DataType.STRING)
   declare password: string;
 
-  @Column({ defaultValue: true })
+  @Column({ type: DataType.BOOLEAN, defaultValue: true })
   isActive: boolean;
+
+  @Column({ type: DataType.ARRAY(DataType.STRING), defaultValue: ['user'] })
+  declare roles: string[];
 }

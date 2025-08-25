@@ -13,13 +13,19 @@ export class UsersRepository implements UsersRepositoryInterface {
     private sequelize: Sequelize,
   ) {}
   async findOneById(id: string): Promise<User | null> {
-    return this.userModel.findByPk(id);
+    return this.userModel.findOne({
+      where: {
+        id,
+        isActive: true,
+      },
+    });
   }
 
   async findOne(email: string): Promise<User | null> {
     return this.userModel.findOne({
       where: {
         email,
+        isActive: true,
       },
     });
   }
