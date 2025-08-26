@@ -14,6 +14,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ThrottlerModule, ThrottlerModuleOptions } from '@nestjs/throttler';
+import { User } from './users/models/user.model';
 
 @Module({
   imports: [
@@ -54,8 +55,9 @@ import { ThrottlerModule, ThrottlerModuleOptions } from '@nestjs/throttler';
       database: process.env.DB_NAME,
       autoLoadModels: true,
       synchronize: Boolean(process.env.DB_SYNC),
-      models: [Order, OrderItem],
+      models: [Order, OrderItem, User],
       repositoryMode: true,
+      // sync: { force: true },
     }),
     CacheModule.registerAsync({
       isGlobal: true,

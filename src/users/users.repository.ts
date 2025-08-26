@@ -35,7 +35,7 @@ export class UsersRepository implements UsersRepositoryInterface {
         {
           firstName: registerUserDto.firstName,
           lastName: registerUserDto.lastName,
-          email: registerUserDto.email,
+          email: registerUserDto.email.toLocaleLowerCase(),
           password: registerUserDto.password,
         },
         { transaction: t },

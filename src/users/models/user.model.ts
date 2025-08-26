@@ -25,7 +25,7 @@ export class User extends Model {
   declare password: string;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  isActive: boolean;
+  declare isActive: boolean;
 
   @Column({ type: DataType.ARRAY(DataType.STRING), defaultValue: ['user'] })
   declare roles: string[];
