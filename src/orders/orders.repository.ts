@@ -37,6 +37,7 @@ export class OrdersRepository implements OrdersRepositoryInterface {
       include: [
         {
           model: this.sequelize.models.OrderItem,
+          association: 'items',
           required: false,
         },
       ],
@@ -65,6 +66,7 @@ export class OrdersRepository implements OrdersRepositoryInterface {
       include: [
         {
           model: this.sequelize.models.OrderItem,
+          association: 'items',
           required: false,
         },
       ],
@@ -106,7 +108,12 @@ export class OrdersRepository implements OrdersRepositoryInterface {
 
         // TODO Wrapp response with only specific data (interface)
         return await this.orderModel.findByPk(order.id, {
-          include: [this.sequelize.models.OrderItem],
+          include: [
+            {
+              model: this.sequelize.models.OrderItem,
+              association: 'items',
+            },
+          ],
           transaction: t,
         });
       });
@@ -175,5 +182,40 @@ export class OrdersRepository implements OrdersRepositoryInterface {
     return await this.orderModel.destroy({
       where: { createdAt: { $lt: threshold } as any },
     });
+  }
+
+  async deleteAll(): Promise<void> {
+    await this.orderModel.destroy({
+      where: {},
+    });
+  }
+
+  async createMany(orders: CreateOrderDto[], user: User): Promise<void> {
+    const ordersToInsert = orders.map((order) => {
+      const generatedOrder = this.orderModel.create(
+        {
+          clientName: order.clientName,
+          state: orderState.initiated,
+          userId: user.id,
+          items: order.items.map((ord) => ({
+            description: ord.description,
+            quantity: ord.quantity,
+            unitPrice: ord.unitPrice,
+          })),
+        },
+        {
+          include: [
+            {
+              model: this.sequelize.models.OrderItem,
+              association: 'items',
+            },
+          ],
+        },
+      );
+      console.log(generatedOrder);
+      return generatedOrder;
+    });
+
+    await Promise.all(ordersToInsert);
   }
 }

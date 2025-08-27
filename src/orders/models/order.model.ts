@@ -13,7 +13,7 @@ import { User } from 'src/users/models/user.model';
 
 @Table({
   timestamps: true,
-  modelName: 'Order',
+  modelName: 'order',
 })
 export class Order extends Model {
   @Column({
@@ -29,7 +29,7 @@ export class Order extends Model {
   @Column
   declare state: string;
 
-  @HasMany(() => OrderItem)
+  @HasMany(() => OrderItem, { as: 'items' })
   declare items: OrderItem[];
 
   @DeletedAt

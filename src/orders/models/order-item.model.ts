@@ -10,7 +10,7 @@ import { Order } from './order.model';
 
 @Table({
   timestamps: true,
-  modelName: 'OrderItem',
+  modelName: 'orderItem',
 })
 export class OrderItem extends Model {
   @Column({

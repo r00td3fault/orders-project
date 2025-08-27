@@ -44,4 +44,15 @@ export class UsersRepository implements UsersRepositoryInterface {
       return user;
     });
   }
+
+  async deleteAll(): Promise<void> {
+    await this.userModel.destroy({
+      where: {},
+    });
+  }
+
+  async createMany(users: Partial<User>[]): Promise<User[]> {
+    const insertUsers = await this.userModel.bulkCreate(users);
+    return insertUsers;
+  }
 }
