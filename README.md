@@ -8,14 +8,15 @@ Orders Api
 ## Features
 
 - Desing Patterns
-- Interceptors, Guards and loggin
+- Interceptors, Guards, loggin, custom decorators
 - Swwager
 - github actions integration
 - Jobs
 - ConfigModule Valid required env
 - Helmet
 - Rate limit 
-- Jwt Authentication
+- Passport
+- Jwt Authorization and Authentication 
 
 
 ## API Reference

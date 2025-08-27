@@ -9,6 +9,8 @@ import { LoginUserDto } from 'src/users/dto/login-user.dto';
 import { ResponseUserDto } from 'src/users/dto/response-user.dto';
 import { LoginResponse } from './dto/login-response.dto';
 import { jwtPayloadType } from './types/jwtPayload.type';
+import { AuthCheckResponse } from './dto/check-auth-response.dto';
+import { User } from '../users/models/user.model';
 
 @Injectable()
 export class AuthService {
@@ -44,5 +46,16 @@ export class AuthService {
 
   private async getJwtToken(payload: jwtPayloadType): Promise<string> {
     return this.jwtService.signAsync(payload);
+  }
+
+  async checkAuthStatus(user: User): Promise<AuthCheckResponse> {
+    const token = await this.getJwtToken({ sub: user.id });
+    return {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      token,
+    };
   }
 }

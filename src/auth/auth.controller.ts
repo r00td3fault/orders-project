@@ -1,4 +1,11 @@
-import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  HttpCode,
+  HttpStatus,
+  Get,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   ApiCreatedResponse,
@@ -10,6 +17,9 @@ import { RegisterUserDto } from 'src/users/dto/register-user.dto';
 import { LoginUserDto } from 'src/users/dto/login-user.dto';
 import { LoginResponse } from './dto/login-response.dto';
 import { ResponseUserDto } from 'src/users/dto/response-user.dto';
+import { Auth, GetUser } from './decorators';
+import { AuthCheckResponse } from './dto/check-auth-response.dto';
+import { User } from '../users/models/user.model';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -27,6 +37,19 @@ export class AuthController {
   @Post('login')
   async signIn(@Body() loginUserDto: LoginUserDto): Promise<LoginResponse> {
     return this.authService.login(loginUserDto);
+  }
+
+  @ApiOperation({
+    summary: 'Revalidate token and return basic costumer info',
+  })
+  @ApiOkResponse({
+    description: 'return de token and basic costumer information',
+    type: AuthCheckResponse,
+  })
+  @Auth()
+  @Get('check-auth-status')
+  checkAuthStatus(@GetUser() user: User): Promise<AuthCheckResponse> {
+    return this.authService.checkAuthStatus(user);
   }
 
   @ApiOperation({
