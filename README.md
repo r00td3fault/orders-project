@@ -93,6 +93,13 @@ $ docker compose up -d
 
 ```
 
+## Run seed
+this method create some users and orders to test
+
+```http
+  GET /seed
+```
+
 ## Compile and run the project
 
 ```bash
