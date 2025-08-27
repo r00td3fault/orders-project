@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Order } from 'src/orders/models/order.model';
 
 @Table({
   timestamps: true,
@@ -29,4 +30,7 @@ export class User extends Model {
 
   @Column({ type: DataType.ARRAY(DataType.STRING), defaultValue: ['user'] })
   declare roles: string[];
+
+  @HasMany(() => Order)
+  declare orders: Order[];
 }

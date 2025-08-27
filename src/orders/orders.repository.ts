@@ -15,6 +15,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { orderState } from './types/order.types';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import type { Cache } from 'cache-manager';
+import { User } from '../users/models/user.model';
 
 @Injectable()
 export class OrdersRepository implements OrdersRepositoryInterface {
@@ -76,7 +77,10 @@ export class OrdersRepository implements OrdersRepositoryInterface {
     return orders;
   }
 
-  async create(createOrderDto: CreateOrderDto): Promise<Order | null> {
+  async create(
+    createOrderDto: CreateOrderDto,
+    user: User,
+  ): Promise<Order | null> {
     try {
       const { items, ...orderData } = createOrderDto;
 
@@ -86,6 +90,7 @@ export class OrdersRepository implements OrdersRepositoryInterface {
             clientName: orderData.clientName,
             isActive: orderData.isActive ?? true,
             state: orderState.initiated,
+            userId: user.id,
           },
           { transaction: t },
         );
@@ -146,6 +151,7 @@ export class OrdersRepository implements OrdersRepositoryInterface {
         await order?.update(
           {
             isActive: false,
+            deletionDate: new Date(),
           },
           {
             transaction: t,
@@ -161,6 +167,7 @@ export class OrdersRepository implements OrdersRepositoryInterface {
 
     await order?.update({
       isActive: false,
+      deletionDate: new Date(),
     });
   }
 

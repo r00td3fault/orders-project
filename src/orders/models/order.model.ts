@@ -1,12 +1,15 @@
 import {
+  BelongsTo,
   Column,
   DataType,
   DeletedAt,
+  ForeignKey,
   HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { OrderItem } from './order-item.model';
+import { User } from 'src/users/models/user.model';
 
 @Table({
   timestamps: true,
@@ -34,4 +37,13 @@ export class Order extends Model {
 
   @Column({ defaultValue: true })
   declare isActive: boolean;
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.UUID,
+  })
+  declare userId: string;
+
+  @BelongsTo(() => User)
+  declare user: User;
 }

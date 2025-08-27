@@ -21,8 +21,9 @@ import {
 
 import { ResponseOrderDto } from './dto/response-order.dto';
 import { orderMapper } from './orders.mapper';
-import { Auth } from 'src/auth/decorators';
+import { Auth, GetUser } from 'src/auth/decorators';
 import { ValidRoles } from '../auth/types/auth.types';
+import { User } from 'src/users/models/user.model';
 
 @ApiTags('orders')
 @Controller('orders')
@@ -65,11 +66,13 @@ export class OrdersController {
     description: 'The Order has been successfully created.',
     type: ResponseOrderDto,
   })
+  @Auth(ValidRoles.user)
   @Post()
   async createOrder(
     @Body() createOrderDto: CreateOrderDto,
+    @GetUser() user: User,
   ): Promise<ResponseOrderDto> {
-    const order = await this.ordersService.create(createOrderDto);
+    const order = await this.ordersService.create(createOrderDto, user);
     return orderMapper(order!);
   }
 

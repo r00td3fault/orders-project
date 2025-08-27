@@ -15,6 +15,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ThrottlerModule, ThrottlerModuleOptions } from '@nestjs/throttler';
 import { User } from './users/models/user.model';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -80,6 +81,7 @@ import { User } from './users/models/user.model';
     CommonModule,
     AuthModule,
     UsersModule,
+    SeedModule,
   ],
   controllers: [],
   providers: [],

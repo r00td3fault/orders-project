@@ -11,6 +11,7 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 import { Order } from './models/order.model';
 import { OrdersRepository } from './orders.repository';
+import { User } from 'src/users/models/user.model';
 
 @Injectable()
 export class OrdersService {
@@ -38,8 +39,11 @@ export class OrdersService {
     return order;
   }
 
-  async create(createOrderDto: CreateOrderDto): Promise<Order | null> {
-    return this.orderRepository.create(createOrderDto);
+  async create(
+    createOrderDto: CreateOrderDto,
+    user: User,
+  ): Promise<Order | null> {
+    return this.orderRepository.create(createOrderDto, user);
   }
 
   async advanceOrder(id: string): Promise<void> {
