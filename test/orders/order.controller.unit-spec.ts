@@ -78,7 +78,7 @@ describe('orderController', () => {
   });
 
   describe('create()', () => {
-    it('should create a user', () => {
+    it('should create an order', () => {
       expect(orderController.createOrder(createorderDto)).resolves.toEqual({
         id: '1',
         ...createorderDto,
@@ -89,7 +89,7 @@ describe('orderController', () => {
   });
 
   describe('findAll()', () => {
-    it('should find all users ', () => {
+    it('should find all orders ', () => {
       orderController.getOrders(pagination);
       expect(orderService.findAll).toHaveBeenCalled();
       expect(orderService.findAll).toHaveBeenCalledWith(pagination);

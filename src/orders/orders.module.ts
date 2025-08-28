@@ -8,6 +8,7 @@ import { Order } from './models/order.model';
 import { OrderItem } from './models/order-item.model';
 import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   controllers: [OrdersController],
@@ -17,6 +18,7 @@ import { UsersModule } from 'src/users/users.module';
     AuthModule,
     UsersModule,
     SequelizeModule.forFeature([Order, OrderItem]),
+    PassportModule,
   ],
   exports: [OrdersService, OrdersRepository],
 })

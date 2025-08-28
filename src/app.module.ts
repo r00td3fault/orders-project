@@ -16,6 +16,7 @@ import { UsersModule } from './users/users.module';
 import { ThrottlerModule, ThrottlerModuleOptions } from '@nestjs/throttler';
 import { User } from './users/models/user.model';
 import { SeedModule } from './seed/seed.module';
+import { MessagesWsModule } from './messages-ws/messages-ws.module';
 
 @Module({
   imports: [
@@ -82,6 +83,7 @@ import { SeedModule } from './seed/seed.module';
     AuthModule,
     UsersModule,
     SeedModule,
+    MessagesWsModule,
   ],
   controllers: [],
   providers: [],
