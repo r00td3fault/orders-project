@@ -25,7 +25,8 @@ Download the file ```Orders.postman_collection.json``` and import in POSTMAN to 
 
 ### Api documentation
 ```
-http://localhost:3000/api
+Postman - https://documenter.getpostman.com/view/44245703/2sB3HgQNth#54868c53-405b-4f0c-a1e8-5727f27218e8
+OpenAPI - http://localhost:3000/api
 ```
 
 #### Get all orders
