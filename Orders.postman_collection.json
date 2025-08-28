@@ -9,7 +9,127 @@
 	"item": [
 		{
 			"name": "auth",
-			"item": []
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"__Pru3b@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"User4\",\n    \"lastName\": \"Perez\",\n    \"email\": \"prueba4@prueba.com\",\n    \"password\": \"__Pru3b@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check-auth-status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth/check-auth-status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"check-auth-status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "seed",
+			"item": [
+				{
+					"name": "run seed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/seed",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"seed"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Get Oders",
@@ -44,38 +164,6 @@
 			"response": []
 		},
 		{
-			"name": "run seed",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/seed",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"seed"
-					]
-				},
-				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
-			},
-			"response": []
-		},
-		{
 			"name": "Get Oders By Id",
 			"event": [
 				{
@@ -95,13 +183,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/orders/4f9a6730-c4d8-4d55-b8d2-9ba823cd722a",
+					"raw": "{{base_url}}/orders/30bf0ddc-c084-4846-a9f0-c307be7c06a6",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"orders",
-						"4f9a6730-c4d8-4d55-b8d2-9ba823cd722a"
+						"30bf0ddc-c084-4846-a9f0-c307be7c06a6"
 					]
 				},
 				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
@@ -126,6 +214,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -190,13 +288,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/orders/4f9a6730-c4d8-4d55-b8d2-9ba823cd722a/advance",
+					"raw": "{{base_url}}/orders/30bf0ddc-c084-4846-a9f0-c307be7c06a6/advance",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"orders",
-						"4f9a6730-c4d8-4d55-b8d2-9ba823cd722a",
+						"30bf0ddc-c084-4846-a9f0-c307be7c06a6",
 						"advance"
 					]
 				},
