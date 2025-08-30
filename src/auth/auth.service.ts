@@ -8,7 +8,7 @@ import { RegisterUserDto } from 'src/users/dto/register-user.dto';
 import { LoginUserDto } from 'src/users/dto/login-user.dto';
 import { ResponseUserDto } from 'src/users/dto/response-user.dto';
 import { LoginResponse } from './dto/login-response.dto';
-import { jwtPayloadType } from './types/jwtPayload.type';
+import { jwtPayloadType } from './types/jwtPayload.types';
 import { AuthCheckResponse } from './dto/check-auth-response.dto';
 import { User } from '../users/models/user.model';
 

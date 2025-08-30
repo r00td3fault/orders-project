@@ -17,6 +17,7 @@ Orders Api
 - Rate limit 
 - Passport
 - Jwt Authorization and Authentication 
+- Websockets
 
 
 ## API Reference
@@ -126,6 +127,10 @@ $ npm run test:e2e
 
 ```
 
+## Websockets
+go to repository to get basic client
+https://github.com/r00td3fault/nest-order-project-front
+
 # Production Build
 1. Create the file ```.env.prod```
 2. fill environment variables
@@ -138,6 +143,7 @@ docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
 ```
 docker-compose -f docker-compose.prod.yaml --env-file .env.prod up
 ```
+
 
 ## Preguntas
 ### ¿Cómo desacoplarías la lógica de negocio del framework NestJS?
