@@ -52,6 +52,7 @@ import { join } from 'path';
       },
     }),
     SequelizeModule.forRoot({
+      ssl: process.env.STAGE === 'prod',
       dialect: 'postgres',
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),

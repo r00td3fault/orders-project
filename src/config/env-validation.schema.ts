@@ -19,4 +19,5 @@ export const EnvValidationSchema = Joi.object({
   APP_RATE_MEDIUM_LIMIT: Joi.number().default(20),
   APP_RATE_LONG_TTL: Joi.number().default(60000),
   APP_RATE_LONG_LIMIT: Joi.number().default(100),
+  STAGE: Joi.string().default('dev'),
 });

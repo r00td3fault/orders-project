@@ -18,4 +18,5 @@ export const EnvConfiguration = () => ({
   appRateMediumLimit: Number(process.env.APP_RATE_MEDIUM_LIMIT),
   appRateLongTtl: Number(process.env.APP_RATE_LONG_TTL),
   appRateLongLimit: Number(process.env.APP_RATE_LONG_LIMIT),
+  stage: process.env.STAGE,
 });
