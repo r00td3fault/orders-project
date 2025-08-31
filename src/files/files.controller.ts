@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Controller,
   Get,
   Param,
@@ -10,10 +9,12 @@ import {
 } from '@nestjs/common';
 import { FilesService } from './files.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { fileFilter, fileNamer } from './helpers';
-import { diskStorage } from 'multer';
+import { fileFilter } from './helpers';
 import type { Response } from 'express';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ResponseUploadDto } from './dto/response-upload.dto';
 
+@ApiTags('files')
 @Controller('files')
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
@@ -25,23 +26,22 @@ export class FilesController {
     res.sendFile(path);
   }
 
-  @Post()
+  @Post('upload')
+  @ApiOperation({
+    summary: 'Upload image to cloud storage',
+  })
+  @ApiOkResponse({
+    description: 'Success and return secure url',
+    type: ResponseUploadDto,
+  })
   @UseInterceptors(
     FileInterceptor('file', {
       fileFilter: fileFilter,
-      // limits: { fileSize: 1000 },
-      storage: diskStorage({
-        destination: './static/uploads',
-        filename: fileNamer,
-      }),
     }),
   )
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    if (!file) {
-      throw new BadRequestException('the file must be an image');
-    }
-    return {
-      fileName: file.originalname,
-    };
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+  ): Promise<ResponseUploadDto> {
+    return this.filesService.uploadImage(file);
   }
 }

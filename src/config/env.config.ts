@@ -19,5 +19,7 @@ export const EnvConfiguration = () => ({
   appRateLongTtl: Number(process.env.APP_RATE_LONG_TTL),
   appRateLongLimit: Number(process.env.APP_RATE_LONG_LIMIT),
   stage: process.env.STAGE,
-  hostApi: process.env.HOST_API,
+  cloudName: process.env.CLD_CLOUD_NAME,
+  cloudApiKey: process.env.CLD_API_KEY,
+  cloudApiSecret: process.env.CLD_API_SECRET,
 });

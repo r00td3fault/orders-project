@@ -18,6 +18,8 @@ Orders Api
 - Passport
 - Jwt Authorization and Authentication 
 - Websockets
+- Upload files with cloud services
+- websockets (coming..)
 
 
 ## API Reference

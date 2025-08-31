@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { CloudinaryModule } from 'nestjs-cloudinary';
 
 import { OrdersModule } from './orders/orders.module';
 import { CommonModule } from './common/common.module';
@@ -81,6 +82,16 @@ import { FilesModule } from './files/files.module';
 
         return { store };
       },
+    }),
+    CloudinaryModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        isGlobal: true,
+        cloud_name: configService.get('CLD_CLOUD_NAME'),
+        api_key: configService.get('CLD_API_KEY'),
+        api_secret: configService.get('CLD_API_SECRET'),
+      }),
     }),
     ScheduleModule.forRoot(),
     OrdersModule,
