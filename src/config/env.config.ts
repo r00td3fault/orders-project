@@ -19,4 +19,5 @@ export const EnvConfiguration = () => ({
   appRateLongTtl: Number(process.env.APP_RATE_LONG_TTL),
   appRateLongLimit: Number(process.env.APP_RATE_LONG_LIMIT),
   stage: process.env.STAGE,
+  hostApi: process.env.HOST_API,
 });

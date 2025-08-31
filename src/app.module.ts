@@ -20,6 +20,7 @@ import { SeedModule } from './seed/seed.module';
 import { MessagesWsModule } from './messages-ws/messages-ws.module';
 
 import { join } from 'path';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -91,6 +92,7 @@ import { join } from 'path';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client'),
     }),
+    FilesModule,
   ],
   controllers: [],
   providers: [],
