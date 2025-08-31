@@ -19,7 +19,7 @@ Orders Api
 - Jwt Authorization and Authentication 
 - Websockets
 - Upload files with cloud services
-- websockets (coming..)
+- Graphql (coming..)
 
 
 ## API Reference
